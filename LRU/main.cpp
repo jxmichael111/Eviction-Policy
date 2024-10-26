@@ -3,6 +3,7 @@
 
 
 int main() {
+    /*
     int capacidad;
     std::cout << "Introduce la capacidad: ";
     std::cin >> capacidad;
@@ -30,6 +31,34 @@ int main() {
             std::cout << "Comando inválido." << std::endl;
         }
     }
+    //*/
 
+    int capacity;
+    std::cout << "Ingrese la capacidad de la cache: ";
+    std::cin >> capacity;
+    LRUCache cache(capacity);
+
+    for (int i = 0; i < 9; i++) {
+        cache.put(i, i*2);
+    }
+    cache.get(7);
+    cache.get(7);
+    cache.get(4);
+    
+    cache.put(10,34);
+
+    cache.get(7);
+    cache.get(7);
+    cache.get(7);
+
+    cache.put(50,50);
+
+    cache.get(3);
+    cache.get(3);
+    cache.get(3);
+
+    cache.mostrarCache();
+    cache.put(100,100);
+    cache.mostrarCache();
     return 0;
 }

@@ -43,6 +43,34 @@ void menu() {
 }
 
 int main() {
-    menu();
+    //menu();
+    int capacity;
+    cout << "Ingrese la capacidad de la cache: ";
+    cin >> capacity;
+    LFUCache cache(capacity);
+
+    for (int i = 0; i < 9; i++) {
+        cache.put(i, i*2);
+    }
+    cache.get(7);
+    cache.get(7);
+    cache.get(4);
+    
+    cache.put(10,34);
+
+    cache.get(7);
+    cache.get(7);
+    cache.get(7);
+
+    cache.put(50,50);
+
+    cache.get(3);
+    cache.get(3);
+    cache.get(3);
+
+    cache.mostrarCache();
+    cache.put(100,100);
+    cache.mostrarCache();
+
     return 0;
 }

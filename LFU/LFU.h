@@ -24,21 +24,27 @@ public:
     }
 
     void put(int key, int value) {
-        if (capacity == 0) return;
+    if (capacity == 0) return;
 
-        if (cache.find(key) != cache.end()) {
-            cache[key].first = value;
-            updateFrequency(key, cache[key].second);
-        } else {
-            if (cache.size() == capacity) {
-                FiboNode* minNode = freqHeap.extractMin();
+
+    if (cache.find(key) != cache.end()) {
+        cache[key].first = value;
+        updateFrequency(key, cache[key].second);
+    } else {
+        if (cache.size() == capacity) {
+            FiboNode* minNode = freqHeap.extractMin();
+            if (minNode) {
                 cache.erase(minNode->key);
                 delete minNode;
             }
-            FiboNode* node = freqHeap.insert(key, 1);
-            cache[key] = {value, node};
         }
+        FiboNode* node = freqHeap.insert(key, 1);
+        cache[key] = {value, node};
     }
+}
+
+
+
     void mostrarCache() {
         cout << "\nElementos en la cache:\n";
         for (const auto& entry : cache) {
@@ -50,9 +56,10 @@ public:
     }
 
 private:
-    void updateFrequency(int key, FiboNode* node) {
-        int newFreq = node->frequency + 1;
-        freqHeap.decreaseKey(node, newFreq);
-        node->frequency = newFreq;
-    }
+void updateFrequency(int key, FiboNode* node) {
+    int newFreq = node->frequency + 1;
+    node->frequency = newFreq;
+    freqHeap.decreaseKey(node, newFreq);
+}
+
 };
